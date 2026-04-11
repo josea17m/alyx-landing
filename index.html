@@ -2,10 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="alyxCLI — Manage clients, payments, inventory and schedule in one place. Built for small businesses in the USA." />
-    <title>alyxCLI — Client & Business Management</title>
+
+    <!-- ── Primary SEO ──────────────────────────────────────────────── -->
+    <title>alyxCLI — Client & Business Management with Square Integration</title>
+    <meta name="description" content="alyxCLI is the all-in-one business management app for small businesses in the USA. Manage clients, track payments, sync Square automatically, and handle inventory and scheduling — starting at $19/month." />
+    <meta name="keywords" content="business management software, client management, Square integration, payment tracking, inventory management, scheduling app, small business tools, USA business software" />
+    <meta name="author" content="alyxCLI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://alyx-landing.netlify.app/" />
+
+    <!-- ── Favicon & Icons ──────────────────────────────────────────── -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#0ea5e9" />
+    <meta name="msapplication-TileColor" content="#0ea5e9" />
+
+    <!-- ── Open Graph (Facebook / LinkedIn) ────────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://alyx-landing.netlify.app/" />
+    <meta property="og:title" content="alyxCLI — Run your business, not spreadsheets." />
+    <meta property="og:description" content="Clients, payments, inventory and schedule in one dashboard. Square syncs automatically — no reconciliation, ever. Free plan available." />
+    <meta property="og:image" content="https://alyx-landing.netlify.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="alyxCLI dashboard showing client payments and Square integration" />
+    <meta property="og:site_name" content="alyxCLI" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ── Twitter Card ─────────────────────────────────────────────── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@alyxcli" />
+    <meta name="twitter:creator" content="@alyxcli" />
+    <meta name="twitter:title" content="alyxCLI — Run your business, not spreadsheets." />
+    <meta name="twitter:description" content="Clients, payments, inventory and schedule in one dashboard. Square syncs automatically — no reconciliation, ever." />
+    <meta name="twitter:image" content="https://alyx-landing.netlify.app/og-image.png" />
+
+    <!-- ── Structured Data — SoftwareApplication ────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "alyxCLI",
+      "url": "https://damaris-inventory.vercel.app",
+      "description": "All-in-one business management software for small businesses. Client management, payment tracking, Square integration, inventory, and scheduling.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Free",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Up to 20 clients, basic dashboard, team with roles"
+        },
+        {
+          "@type": "Offer",
+          "name": "Base Plan",
+          "price": "19",
+          "priceCurrency": "USD",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "billingDuration": "P1M"
+          },
+          "description": "Unlimited clients, payment tracking, dashboard, Square sync, multi-user roles"
+        }
+      ],
+      "featureList": [
+        "Client Management",
+        "Square Payment Integration",
+        "Inventory Management",
+        "Appointment Scheduling",
+        "Payment Reminders via WhatsApp and SMS",
+        "Team Roles & Permissions",
+        "Excel Import/Export"
+      ],
+      "screenshot": "https://alyx-landing.netlify.app/og-image.png",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "48"
+      }
+    }
+    </script>
+
+    <!-- ── Structured Data — Organization ───────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "alyxCLI",
+      "url": "https://alyx-landing.netlify.app",
+      "logo": "https://alyx-landing.netlify.app/favicon.svg",
+      "description": "Business management software for small businesses in the USA",
+      "areaServed": "US"
+    }
+    </script>
+
+    <!-- ── Fonts ────────────────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alyx-landing.netlify.app/sitemap.xml
