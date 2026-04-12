@@ -603,149 +603,182 @@ const SQUARE_STEPS = [
   },
 ]
 
+// ── Scroll-driven layer: opacity + y driven purely by scroll progress ─────────
+// No AnimatePresence, no state snaps — all 4 layers live simultaneously.
+// N=4, crossfade=0.14 → peakWidth = (1 - 3*0.14)/4 = 0.155
+const N = SQUARE_STEPS.length
+const CF = 0.14
+const PW = (1 - (N - 1) * CF) / N  // peak width per step ≈ 0.155
+
+function getStepRanges(i) {
+  const peakStart = i * (PW + CF)
+  const peakEnd   = peakStart + PW
+  const fadeIn    = Math.max(0, peakStart - CF)
+  const fadeOut   = Math.min(1, peakEnd   + CF)
+  const isFirst   = i === 0
+  const isLast    = i === N - 1
+
+  if (isFirst)  return { input: [0, peakEnd, fadeOut],              op: [1,1,0],    y: [0,0,-20]     }
+  if (isLast)   return { input: [fadeIn, peakStart, 1],             op: [0,1,1],    y: [20,0,0]      }
+  return          { input: [fadeIn, peakStart, peakEnd, fadeOut], op: [0,1,1,0], y: [20,0,0,-20] }
+}
+
+function StepLayer({ progress, index, children }) {
+  const { input, op, y: yVals } = getStepRanges(index)
+  const opacity = useTransform(progress, input, op)
+  const y       = useTransform(progress, input, yVals)
+  return (
+    <motion.div style={{ opacity, y }} className="absolute inset-0 pointer-events-none">
+      {children}
+    </motion.div>
+  )
+}
+
+function StepDot({ progress, index, step }) {
+  const { input, op } = getStepRanges(index)
+  const wVals  = op.map(v => v > 0.5 ? 28 : 12)
+  const opacity = useTransform(progress, input, op.map(v => 0.3 + v * 0.7))
+  const width   = useTransform(progress, input, wVals)
+  return <motion.div className="h-1 rounded-full" style={{ width, backgroundColor: step.color, opacity }} />
+}
+
 function SquareSection() {
   const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
-  const [activeStep, setActiveStep] = useState(0)
+  const { scrollYProgress: raw } = useScroll({ target: containerRef, offset: ['start start', 'end end'] })
+  // Tight spring — tracks scroll responsively but eliminates micro-jitter
+  const progress = useSpring(raw, { stiffness: 200, damping: 35, mass: 0.8 })
 
-  // Snap steps at even quarter-points — each step occupies exactly 25% of scroll
-  useMotionValueEvent(scrollYProgress, 'change', v => {
-    const next = Math.min(SQUARE_STEPS.length - 1, Math.floor(v * SQUARE_STEPS.length))
-    setActiveStep(next)
-  })
-
-  const step = SQUARE_STEPS[activeStep]
-
-  // ── Mobile: just stacked cards, no sticky ─────────────────────────
-  const MobileLayout = () => (
-    <section id="square" className="py-20 px-5 bg-[#00071a]">
-      <div className="max-w-xl mx-auto">
-        <div className="flex items-center gap-2.5 mb-10">
-          <SquareLogo size={18} />
-          <span className="text-sm font-semibold text-[#5ba3ff]">Square Integration</span>
-        </div>
-        <div className="space-y-6">
-          {SQUARE_STEPS.map((s, i) => (
-            <motion.div key={i}
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease }}
-              className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5">
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="text-[10px] font-bold text-white/25 font-mono">{s.num}</span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full border"
-                  style={{ color: s.color, background: `${s.color}18`, borderColor: `${s.color}40` }}>
-                  {s.badge}
-                </span>
-              </div>
-              <h3 className="text-xl font-black text-white mb-2">{s.title}</h3>
-              <p className="text-white/45 text-sm leading-relaxed mb-4">{s.desc}</p>
-              <ul className="space-y-2">
-                {s.bullets.map(b => (
-                  <li key={b} className="flex items-center gap-2 text-white/55 text-sm">
-                    <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
-                      style={{ background: `${s.color}25`, border: `1px solid ${s.color}40` }}>
-                      <Check size={9} style={{ color: s.color }} />
-                    </div>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
-        <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="inline-flex items-center gap-2 mt-8 text-white font-semibold px-6 py-3 rounded-xl text-sm"
-          style={{ background: '#006AFF', boxShadow: '0 0 24px rgba(0,106,255,0.35)' }}>
-          <SquareLogo size={16} />Connect Square free<ArrowRight size={15} />
-        </motion.a>
-      </div>
-    </section>
+  // Coarse active step — only used for the background colour blob
+  const [activeBg, setActiveBg] = useState(0)
+  useMotionValueEvent(raw, 'change', v =>
+    setActiveBg(Math.min(N - 1, Math.floor(v * N)))
   )
 
   return (
     <>
-      {/* Mobile */}
-      <div className="md:hidden"><MobileLayout /></div>
+      {/* Shared anchor so nav #square works on both layouts */}
+      <div id="square" />
 
-      {/* Desktop sticky — 260vh = 160vh scrollable / 4 steps = 40vh per step */}
-      <section ref={containerRef} style={{ height: '260vh' }} className="relative hidden md:block">
+      {/* ── Mobile: plain stacked cards ─────────────────────────────── */}
+      <section className="md:hidden py-20 px-5 bg-[#00071a]">
+        <div className="max-w-xl mx-auto">
+          <div className="flex items-center gap-2.5 mb-10">
+            <SquareLogo size={18} />
+            <span className="text-sm font-semibold text-[#5ba3ff]">Square Integration</span>
+          </div>
+          <div className="space-y-5">
+            {SQUARE_STEPS.map((s, i) => (
+              <motion.div key={i}
+                initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease }}
+                className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5">
+                <div className="flex items-center gap-2.5 mb-3">
+                  <span className="text-[10px] font-bold text-white/25 font-mono">{s.num}</span>
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full border"
+                    style={{ color: s.color, background: `${s.color}18`, borderColor: `${s.color}40` }}>
+                    {s.badge}
+                  </span>
+                </div>
+                <h3 className="text-xl font-black text-white mb-2">{s.title}</h3>
+                <p className="text-white/45 text-sm leading-relaxed mb-4">{s.desc}</p>
+                <ul className="space-y-2">
+                  {s.bullets.map(b => (
+                    <li key={b} className="flex items-center gap-2 text-white/55 text-sm">
+                      <div className="w-4 h-4 rounded-full flex items-center justify-center shrink-0"
+                        style={{ background: `${s.color}25`, border: `1px solid ${s.color}40` }}>
+                        <Check size={9} style={{ color: s.color }} />
+                      </div>
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+          <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="inline-flex items-center gap-2 mt-8 text-white font-semibold px-6 py-3 rounded-xl text-sm"
+            style={{ background: '#006AFF', boxShadow: '0 0 24px rgba(0,106,255,0.35)' }}>
+            <SquareLogo size={16} />Connect Square free<ArrowRight size={15} />
+          </motion.a>
+        </div>
+      </section>
+
+      {/* ── Desktop sticky ───────────────────────────────────────────── */}
+      {/* 240vh total → 140vh scrollable → 35vh per step transition     */}
+      <section ref={containerRef} style={{ height: '240vh' }} className="relative hidden md:block">
         <div className="sticky top-0 h-screen overflow-hidden bg-[#00071a]">
+          {/* Background */}
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-[#006AFF] opacity-[0.07] blur-[120px]" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.06] blur-[100px] transition-all duration-500"
-              style={{ background: step.color }} />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.06] blur-[110px] transition-colors duration-700"
+              style={{ background: SQUARE_STEPS[activeBg].color }} />
           </div>
 
-          <div className="relative max-w-6xl mx-auto h-full flex flex-col justify-center px-5 py-16">
+          <div className="relative max-w-6xl mx-auto h-full px-5 py-16 flex flex-col justify-center">
+            {/* Header */}
             <div className="flex items-center gap-2.5 mb-10">
               <SquareLogo size={18} />
               <span className="text-sm font-semibold text-[#5ba3ff]">Square Integration</span>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left */}
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* Left ── progress dots + stacked text */}
               <div>
-                {/* Step pills */}
                 <div className="flex items-center gap-2 mb-8">
                   {SQUARE_STEPS.map((s, i) => (
-                    <div key={i} className="h-1 rounded-full transition-all duration-300"
-                      style={{
-                        width: i === activeStep ? '2rem' : '0.75rem',
-                        background: i === activeStep ? s.color : i < activeStep ? `${s.color}60` : 'rgba(255,255,255,0.1)'
-                      }} />
+                    <StepDot key={i} progress={progress} index={i} step={s} />
                   ))}
                 </div>
 
-                <AnimatePresence mode="popLayout">
-                  <motion.div key={activeStep}
-                    initial={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: -16, filter: 'blur(4px)' }}
-                    transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}>
-                    <div className="flex items-center gap-2.5 mb-4">
-                      <span className="text-xs font-bold text-white/25 font-mono">{step.num}</span>
-                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full border"
-                        style={{ color: step.color, background: `${step.color}18`, borderColor: `${step.color}40` }}>
-                        {step.badge}
-                      </span>
-                    </div>
-                    <h2 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-black text-white leading-tight mb-4">
-                      {step.title}
-                    </h2>
-                    <p className="text-white/45 text-base leading-relaxed mb-6">{step.desc}</p>
-                    <ul className="space-y-2.5">
-                      {step.bullets.map(b => (
-                        <li key={b} className="flex items-center gap-3 text-white/60 text-sm">
-                          <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                            style={{ background: `${step.color}25`, border: `1px solid ${step.color}40` }}>
-                            <Check size={10} style={{ color: step.color }} />
-                          </div>
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </AnimatePresence>
+                {/* All 4 text layers stacked — opacity-driven, no snapping */}
+                <div className="relative overflow-hidden" style={{ minHeight: '270px' }}>
+                  {SQUARE_STEPS.map((s, i) => (
+                    <StepLayer key={i} progress={progress} index={i}>
+                      <div>
+                        <div className="flex items-center gap-2.5 mb-4">
+                          <span className="text-xs font-bold text-white/25 font-mono">{s.num}</span>
+                          <span className="text-xs font-semibold px-2.5 py-1 rounded-full border"
+                            style={{ color: s.color, background: `${s.color}18`, borderColor: `${s.color}40` }}>
+                            {s.badge}
+                          </span>
+                        </div>
+                        <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-black text-white leading-tight mb-4">
+                          {s.title}
+                        </h2>
+                        <p className="text-white/45 text-base leading-relaxed mb-6">{s.desc}</p>
+                        <ul className="space-y-2.5">
+                          {s.bullets.map(b => (
+                            <li key={b} className="flex items-center gap-3 text-white/60 text-sm">
+                              <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                                style={{ background: `${s.color}25`, border: `1px solid ${s.color}40` }}>
+                                <Check size={10} style={{ color: s.color }} />
+                              </div>
+                              {b}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </StepLayer>
+                  ))}
+                </div>
 
                 <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 mt-8 text-white font-semibold px-6 py-3 rounded-xl text-sm"
+                  className="inline-flex items-center gap-2 mt-6 text-white font-semibold px-6 py-3 rounded-xl text-sm"
                   style={{ background: '#006AFF', boxShadow: '0 0 30px rgba(0,106,255,0.35)' }}>
                   <SquareLogo size={16} />Connect Square free<ArrowRight size={15} />
                 </motion.a>
               </div>
 
-              {/* Right */}
-              <AnimatePresence mode="popLayout">
-                <motion.div key={activeStep}
-                  initial={{ opacity: 0, x: 24, filter: 'blur(6px)' }}
-                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, x: -16, filter: 'blur(4px)' }}
-                  transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}>
-                  {step.visual}
-                </motion.div>
-              </AnimatePresence>
+              {/* Right ── all 4 visuals stacked, opacity-driven */}
+              <div className="relative overflow-hidden" style={{ minHeight: '320px' }}>
+                {SQUARE_STEPS.map((s, i) => (
+                  <StepLayer key={i} progress={progress} index={i}>
+                    {s.visual}
+                  </StepLayer>
+                ))}
+              </div>
             </div>
           </div>
         </div>
