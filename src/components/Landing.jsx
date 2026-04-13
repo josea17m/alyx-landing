@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 
 const APP_URL = 'https://app.alyxcli.com'
+const STARTED_URL = '/get-started'
 const ease = [0.22, 1, 0.36, 1]
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
@@ -337,7 +338,7 @@ function Navbar() {
             {lang === 'en' ? 'ES' : 'EN'}
           </motion.button>
           <a href={APP_URL} className="text-sm font-medium text-white/45 hover:text-white transition-colors">{t.nav.signin}</a>
-          <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+          <motion.a href={STARTED_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
             className="text-sm font-semibold bg-[#0ea5e9] hover:bg-[#0284c7] text-white px-4 py-2 rounded-lg transition-colors"
             style={{ boxShadow: '0 0 20px rgba(14,165,233,0.35)' }}>
             {t.nav.cta}
@@ -365,7 +366,7 @@ function Navbar() {
                 {lang === 'en' ? '🇲🇽 Español' : '🇺🇸 English'}
               </button>
             </div>
-            <a href={APP_URL} className="bg-[#0ea5e9] text-white font-semibold py-2.5 rounded-xl text-center text-sm">
+            <a href={STARTED_URL} className="bg-[#0ea5e9] text-white font-semibold py-2.5 rounded-xl text-center text-sm">
               {t.nav.cta}
             </a>
           </motion.div>
@@ -430,7 +431,7 @@ function Hero() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.15, ease }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <motion.a href={APP_URL} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+          <motion.a href={STARTED_URL} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold px-8 py-3.5 rounded-xl text-[15px] transition-colors"
             style={{ boxShadow: '0 0 40px rgba(14,165,233,0.45)' }}>
             {t.hero.cta1} <ArrowRight size={16} />
@@ -871,7 +872,7 @@ function SquareSection() {
               </motion.div>
             ))}
           </div>
-          <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+          <motion.a href={STARTED_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
             initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="inline-flex items-center gap-2 mt-8 text-white font-semibold px-6 py-3 rounded-xl text-sm"
             style={{ background: '#006AFF', boxShadow: '0 0 24px rgba(0,106,255,0.35)' }}>
@@ -934,7 +935,7 @@ function SquareSection() {
                   ))}
                 </div>
 
-                <motion.a href={APP_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                <motion.a href={STARTED_URL} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2 mt-6 text-white font-semibold px-6 py-3 rounded-xl text-sm"
                   style={{ background: '#006AFF', boxShadow: '0 0 30px rgba(0,106,255,0.35)' }}>
                   <SquareLogo size={16} />{t.square.cta}<ArrowRight size={15} />
@@ -996,7 +997,7 @@ function Pricing() {
                 </li>
               ))}
             </ul>
-            <motion.a href={APP_URL} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+            <motion.a href={STARTED_URL} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               className="block text-center text-sm font-semibold border border-slate-200 rounded-xl py-2.5 text-slate-700 hover:bg-slate-50 transition-colors">
               {t.pricing.free.cta}
             </motion.a>
@@ -1071,7 +1072,7 @@ function Pricing() {
                   <p className="text-xs text-slate-400">{t.pricing.base.cancelNote}</p>
                 </div>
               </div>
-              <motion.a href={APP_URL} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+              <motion.a href={STARTED_URL} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 className="block text-center text-white font-semibold py-3.5 rounded-xl text-sm transition-colors"
                 style={{ background: 'linear-gradient(135deg, #0ea5e9, #a855f7)', boxShadow: '0 4px 20px rgba(14,165,233,0.3)' }}>
                 {t.pricing.base.cta} — ${total}/mo
@@ -1186,7 +1187,7 @@ function FinalCTA() {
           ))}
         </h2>
         <p className="text-white/40 text-lg mb-10">{t.cta.sub}</p>
-        <motion.a href={APP_URL} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
+        <motion.a href={STARTED_URL} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}
           className="inline-flex items-center gap-2.5 text-white font-bold px-9 py-4 rounded-2xl text-lg"
           style={{ background: 'linear-gradient(135deg, #0ea5e9, #a855f7)', boxShadow: '0 0 60px rgba(14,165,233,0.3)' }}>
           {t.cta.btn} <ArrowRight size={20} />
