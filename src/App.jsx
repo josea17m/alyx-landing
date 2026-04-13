@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Landing from './components/Landing'
 import GetStarted from './components/GetStarted'
 import Privacy from './components/Privacy'
+import DeleteAccount from './components/DeleteAccount'
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/delete-account" element={<DeleteAccount />} />
       </Routes>
     </BrowserRouter>
   )
