@@ -9,7 +9,7 @@ export default function Privacy() {
           Privacy Policy
         </h1>
         <p style={{ color: '#64748b', fontSize: '14px', marginBottom: '40px' }}>
-          Last updated: April 13, 2026
+          Last updated: April 19, 2026
         </p>
 
         <Section title="1. Who we are">
@@ -74,14 +74,25 @@ export default function Privacy() {
           <p>Alyx is not intended for users under the age of 18. We do not knowingly collect personal information from children.</p>
         </Section>
 
-        <Section title="9. Changes to this policy">
+        <Section title="9. SMS communications">
+          <p>If you provide a phone number, you may receive transactional SMS messages such as payment reminders, event notifications, and policy renewal reminders. Message and data rates may apply. Reply <strong style={{ color: '#fff' }}>STOP</strong> to unsubscribe at any time. See our <a href="/sms-consent" style={link}>SMS Consent</a> page for full details.</p>
+        </Section>
+
+        <Section title="10. Changes to this policy">
           <p>We may update this policy from time to time. When we do, we will update the date at the top and notify you via email if the changes are significant.</p>
         </Section>
 
-        <Section title="10. Contact">
+        <Section title="11. Contact">
           <p>Questions about this policy? Contact us at:</p>
           <p><a href="mailto:privacy@alyxcli.com" style={link}>privacy@alyxcli.com</a></p>
         </Section>
+
+        <p style={{ marginTop: '48px', color: '#334155', fontSize: '13px' }}>
+          See also:{' '}
+          <a href="/terms" style={link}>Terms of Service</a>
+          {' · '}
+          <a href="/sms-consent" style={link}>SMS Consent</a>
+        </p>
 
       </div>
     </div>
