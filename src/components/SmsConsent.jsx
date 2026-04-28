@@ -38,7 +38,7 @@ export default function SmsConsent() {
         <Section title="Contact">
           <p>
             For questions about SMS communications, contact us at{' '}
-            <a href="mailto:support@alyxcli.com" style={link}>support@alyxcli.com</a>.
+            <a href="mailto:support@alyxflow.com" style={link}>support@alyxflow.com</a>.
           </p>
         </Section>
 

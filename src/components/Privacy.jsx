@@ -13,7 +13,7 @@ export default function Privacy() {
         </p>
 
         <Section title="1. Who we are">
-          <p>Alyx ("we", "our", "us") is a business management platform available at <a href="https://app.alyxcli.com" style={link}>app.alyxcli.com</a> and as a mobile/desktop application. We help small businesses manage clients, inventory, schedules, and payments.</p>
+          <p>Alyx ("we", "our", "us") is a business management platform available at <a href="https://app.alyxflow.com" style={link}>app.alyxflow.com</a> and as a mobile/desktop application. We help small businesses manage clients, inventory, schedules, and payments.</p>
         </Section>
 
         <Section title="2. Information we collect">
@@ -63,7 +63,7 @@ export default function Privacy() {
             <li><strong>Delete</strong> your account and all associated data.</li>
             <li><strong>Export</strong> your data (available in Settings → Export).</li>
           </ul>
-          <p>To exercise any of these rights, contact us at <a href="mailto:privacy@alyxcli.com" style={link}>privacy@alyxcli.com</a>.</p>
+          <p>To exercise any of these rights, contact us at <a href="mailto:privacy@alyxflow.com" style={link}>privacy@alyxflow.com</a>.</p>
         </Section>
 
         <Section title="7. Data retention">
@@ -84,7 +84,7 @@ export default function Privacy() {
 
         <Section title="11. Contact">
           <p>Questions about this policy? Contact us at:</p>
-          <p><a href="mailto:privacy@alyxcli.com" style={link}>privacy@alyxcli.com</a></p>
+          <p><a href="mailto:privacy@alyxflow.com" style={link}>privacy@alyxflow.com</a></p>
         </Section>
 
         <p style={{ marginTop: '48px', color: '#334155', fontSize: '13px' }}>

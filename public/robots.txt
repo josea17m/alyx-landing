@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alyxcli.com/sitemap.xml
+Sitemap: https://alyxflow.com/sitemap.xml

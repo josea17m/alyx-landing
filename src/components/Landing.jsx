@@ -9,7 +9,7 @@ import {
   CheckCircle, Layers, Shield, Zap, Bell, FileSpreadsheet
 } from 'lucide-react'
 
-const APP_URL = 'https://app.alyxcli.com'
+const APP_URL = 'https://app.alyxflow.com'
 const STARTED_URL = '/get-started'
 const ease = [0.22, 1, 0.36, 1]
 
@@ -69,13 +69,13 @@ const TRANS = {
         {
           badge: 'Payment received',
           title: 'Client pays through Square.',
-          desc: 'Your client pays using Square — in-person, online, or via invoice. alyxCLI listens in real-time via webhooks.',
+          desc: 'Your client pays using Square — in-person, online, or via invoice. AlyxFlow listens in real-time via webhooks.',
           bullets: ['In-person & online payments', 'Real-time webhook events', 'All Square payment types'],
         },
         {
           badge: 'Auto-matched',
           title: 'Matched to your client instantly.',
-          desc: 'alyxCLI matches the Square payment to the right client — by Square customer ID or by amount within the billing month.',
+          desc: 'AlyxFlow matches the Square payment to the right client — by Square customer ID or by amount within the billing month.',
           bullets: ['Matches by customer ID or amount', 'No duplicate payments', 'Works across 60 days'],
         },
         {
@@ -115,7 +115,7 @@ const TRANS = {
       eyebrow: 'What people say',
       title: 'Real businesses, real results.',
       items: [
-        { quote: "I used to spend 2 hours a month reconciling Square with my spreadsheet. Now alyxCLI does it automatically — I don't even think about it.", name: 'Sandra M.', role: 'Event decorator, Miami FL' },
+        { quote: "I used to spend 2 hours a month reconciling Square with my spreadsheet. Now AlyxFlow does it automatically — I don't even think about it.", name: 'Sandra M.', role: 'Event decorator, Miami FL' },
         { quote: "The schedule + inventory combo is a game changer. We know exactly what items are booked and what's available — right from the dashboard.", name: 'Roberto V.', role: 'Party rental, Dallas TX' },
         { quote: "My clients love that I send professional payment reminders. The WhatsApp integration alone is worth the subscription.", name: 'Carmen R.', role: 'Insurance agent, Houston TX' },
       ],
@@ -124,7 +124,7 @@ const TRANS = {
       title: 'Start managing\nsmarter today.',
       sub: 'Free plan available. Connect Square in minutes.',
       btn: 'Get started free',
-      note: 'alyxCLI · Built for small businesses in the USA',
+      note: 'AlyxFlow · Built for small businesses in the USA',
     },
     footer: {
       links: ['Features', 'Square', 'Pricing'],
@@ -176,13 +176,13 @@ const TRANS = {
         {
           badge: 'Pago recibido',
           title: 'Tu cliente paga por Square.',
-          desc: 'Tu cliente paga con Square — en persona, en línea o por factura. alyxCLI escucha en tiempo real mediante webhooks.',
+          desc: 'Tu cliente paga con Square — en persona, en línea o por factura. AlyxFlow escucha en tiempo real mediante webhooks.',
           bullets: ['Pagos presenciales y en línea', 'Eventos webhook en tiempo real', 'Todos los tipos de pago Square'],
         },
         {
           badge: 'Auto-vinculado',
           title: 'Vinculado a tu cliente al instante.',
-          desc: 'alyxCLI vincula el pago de Square al cliente correcto — por ID de cliente o por monto dentro del mes de cobro.',
+          desc: 'AlyxFlow vincula el pago de Square al cliente correcto — por ID de cliente o por monto dentro del mes de cobro.',
           bullets: ['Vincula por ID de cliente o monto', 'Sin pagos duplicados', 'Funciona en ventana de 60 días'],
         },
         {
@@ -222,7 +222,7 @@ const TRANS = {
       eyebrow: 'Lo que dicen',
       title: 'Negocios reales, resultados reales.',
       items: [
-        { quote: "Antes pasaba 2 horas al mes conciliando Square con mi hoja de cálculo. Ahora alyxCLI lo hace solo — ni me acuerdo de eso.", name: 'Sandra M.', role: 'Decoradora de eventos, Miami FL' },
+        { quote: "Antes pasaba 2 horas al mes conciliando Square con mi hoja de cálculo. Ahora AlyxFlow lo hace solo — ni me acuerdo de eso.", name: 'Sandra M.', role: 'Decoradora de eventos, Miami FL' },
         { quote: "La combinación agenda + inventario es increíble. Sabemos exactamente qué artículos están reservados y cuáles disponibles — directo desde el panel.", name: 'Roberto V.', role: 'Alquiler de fiestas, Dallas TX' },
         { quote: "Mis clientes adoran que les envíe recordatorios de pago profesionales. La integración con WhatsApp sola ya vale la suscripción.", name: 'Carmen R.', role: 'Agente de seguros, Houston TX' },
       ],
@@ -231,7 +231,7 @@ const TRANS = {
       title: 'Empieza a gestionar\nmejor hoy.',
       sub: 'Plan gratuito. Conecta Square en minutos.',
       btn: 'Empieza gratis',
-      note: 'alyxCLI · Hecho para negocios en EE.UU.',
+      note: 'AlyxFlow · Hecho para negocios en EE.UU.',
     },
     footer: {
       links: ['Funciones', 'Square', 'Precios'],
@@ -319,7 +319,7 @@ function Navbar() {
           <motion.div whileHover={{ rotate: -6, scale: 1.1 }} transition={{ type: 'spring', stiffness: 400 }}>
             <Logo size={26} />
           </motion.div>
-          <span className="font-bold text-[17px] text-white tracking-tight">alyxCLI</span>
+          <span className="font-bold text-[17px] text-white tracking-tight">Alyx<span style={{ color: '#38bdf8' }}>Flow</span></span>
         </a>
 
         <nav className="hidden md:flex items-center gap-7">
@@ -462,7 +462,7 @@ function Hero() {
             <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
             <div className="w-3 h-3 rounded-full bg-[#28c840]" />
             <div className="ml-4 flex-1 max-w-xs bg-white/[0.06] rounded-md px-3 py-1 text-[11px] text-white/25">
-              app.alyxcli.com
+              app.alyxflow.com
             </div>
           </div>
           <div className="grid grid-cols-12 min-h-[320px]">
@@ -731,7 +731,7 @@ const SQUARE_VISUALS = [
     </div>
     <div className="flex items-center gap-2 px-4 py-2.5 bg-white/[0.04] border border-white/[0.06] rounded-xl">
       <Webhook size={14} className="text-[#a855f7]" />
-      <span className="text-xs text-white/50">Webhook received by alyxCLI backend</span>
+      <span className="text-xs text-white/50">Webhook received by AlyxFlow backend</span>
       <span className="ml-auto text-[10px] text-emerald-400">200 OK</span>
     </div>
   </div>,
@@ -1304,7 +1304,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
         <div className="flex items-center gap-2.5">
           <Logo size={20} />
-          <span className="text-white/40 text-sm font-medium">alyxCLI</span>
+          <span className="text-white/40 text-sm font-medium">Alyx<span style={{ color: '#38bdf8', opacity: 0.6 }}>Flow</span></span>
         </div>
         <div className="flex items-center gap-6 text-xs text-white/20">
           {t.footer.links.map((l, i) => (
@@ -1312,7 +1312,7 @@ function Footer() {
           ))}
           <a href={APP_URL} className="hover:text-white/50 transition-colors">{t.footer.signin}</a>
         </div>
-        <p className="text-xs text-white/15">© {new Date().getFullYear()} alyxCLI.</p>
+        <p className="text-xs text-white/15">© {new Date().getFullYear()} Alyx<span style={{ color: '#38bdf8', opacity: 0.5 }}>Flow</span>.</p>
       </div>
     </footer>
   )

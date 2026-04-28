@@ -25,7 +25,7 @@ export default function Terms() {
             Alyx is a business management platform that helps small businesses manage clients,
             inventory, events, schedules, and payments. The Service is provided by Alyx
             ("we", "us", "our") and is accessible at{' '}
-            <a href="https://app.alyxcli.com" style={link}>app.alyxcli.com</a>.
+            <a href="https://app.alyxflow.com" style={link}>app.alyxflow.com</a>.
           </p>
         </Section>
 
@@ -49,7 +49,7 @@ export default function Terms() {
             <li>Prices are listed in USD and may change with 30 days' notice.</li>
             <li>Subscriptions renew automatically unless cancelled before the renewal date.</li>
             <li>Refunds are handled on a case-by-case basis — contact us at{' '}
-              <a href="mailto:support@alyxcli.com" style={link}>support@alyxcli.com</a>.
+              <a href="mailto:support@alyxflow.com" style={link}>support@alyxflow.com</a>.
             </li>
             <li>Downgrading your plan takes effect at the end of the current billing cycle.</li>
           </ul>
@@ -162,7 +162,7 @@ export default function Terms() {
         <Section title="16. Contact">
           <p>
             Questions about these terms? Contact us at:{' '}
-            <a href="mailto:support@alyxcli.com" style={link}>support@alyxcli.com</a>
+            <a href="mailto:support@alyxflow.com" style={link}>support@alyxflow.com</a>
           </p>
         </Section>
 

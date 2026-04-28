@@ -3,7 +3,7 @@ import { Monitor, Globe, Apple, ArrowLeft } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 const GITHUB_RELEASE = 'https://github.com/josea17m/damaris-inventory/releases/latest/download'
-const APP_URL = 'https://app.alyxcli.com'
+const APP_URL = 'https://app.alyxflow.com'
 const ease = [0.22, 1, 0.36, 1]
 
 function WindowsLogo() {

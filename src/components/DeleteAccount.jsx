@@ -16,7 +16,7 @@ export default function DeleteAccount() {
         <div style={card}>
           <h2 style={h2}>Option 1 — From the app (fastest)</h2>
           <p style={body}>
-            Sign in to <a href="https://app.alyxcli.com" style={link}>app.alyxcli.com</a> →
+            Sign in to <a href="https://app.alyxflow.com" style={link}>app.alyxflow.com</a> →
             go to <strong style={{ color: '#f1f5f9' }}>Settings → Account → Delete account</strong>.
           </p>
           <p style={body}>
@@ -29,8 +29,8 @@ export default function DeleteAccount() {
           <h2 style={h2}>Option 2 — Email us</h2>
           <p style={body}>
             Send an email to{' '}
-            <a href="mailto:privacy@alyxcli.com?subject=Account deletion request" style={link}>
-              privacy@alyxcli.com
+            <a href="mailto:privacy@alyxflow.com?subject=Account deletion request" style={link}>
+              privacy@alyxflow.com
             </a>{' '}
             with the subject <strong style={{ color: '#f1f5f9' }}>"Account deletion request"</strong> from the email address associated with your account.
           </p>

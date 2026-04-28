@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#020b18"/>
+  <!-- Gradient blobs -->
+  <circle cx="200" cy="200" r="350" fill="#0ea5e9" fill-opacity="0.12"/>
+  <circle cx="1000" cy="400" r="300" fill="#a855f7" fill-opacity="0.09"/>
+  <circle cx="600" cy="600" r="250" fill="#f43f5e" fill-opacity="0.07"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Logo shape -->
+  <g transform="translate(480, 140) scale(5)">
+    <path fill="#0ea5e9" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/>
+  </g>
+  <!-- alyxflow text -->
+  <text x="600" y="370" font-family="Inter, Arial, sans-serif" font-size="80" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-2">AlyxFlow</text>
+  <!-- Tagline EN -->
+  <text x="600" y="440" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="white" fill-opacity="0.45" text-anchor="middle">Run your business, not spreadsheets.</text>
+  <!-- Tagline ES -->
+  <text x="600" y="480" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="400" fill="white" fill-opacity="0.25" text-anchor="middle">Gestiona tu negocio, no planillas.</text>
+  <!-- Bottom badge -->
+  <rect x="450" y="520" width="300" height="38" rx="19" fill="#0ea5e9" fill-opacity="0.15" stroke="#0ea5e9" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="600" y="544" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#7dd3fc" text-anchor="middle" letter-spacing="2">FREE PLAN AVAILABLE · alyxflow.com</text>
+</svg>
